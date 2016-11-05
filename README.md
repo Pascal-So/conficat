@@ -1,6 +1,8 @@
 # conficat - CONFIg file CAT
 
-A utility for printing files to stdout, ignoring comment lines
+A utility for printing files to stdout, ignoring comment lines.
+
+**Requires [argparse](https://github.com/Pascal-So/argparse)**
 
 ## Usage
 
