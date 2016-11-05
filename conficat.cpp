@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 
-#include "argparse/argparse.h"
+#include "argparse.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ using namespace std;
 */
 
 
-
+// does this string consist entirely of whitespace? (tab, space)
 bool string_is_whitespace(const string & s){
     for(auto c:s){
 	if(!(c == ' ' ||
@@ -52,7 +52,7 @@ void help_message(){
 
     cerr<<"Usage: conficat [INPUT FILE] [OPTIONS]\n\n";
     cerr<<"-r, --replace-comment    Replace a comment line by an empty line rather\n";
-    cerr<<"                         than deleting the line";
+    cerr<<"                         than deleting the line\n";
     cerr<<"-c, --comment-string     Specify the string to use as comment sequence.\n";
     cerr<<"-i, --ignore-leading-ws  Ignore whitespace before the comment sequence.\n";
     cerr<<"-s                       Collapse whitespace blocks to a single line.\n";
@@ -104,7 +104,7 @@ int main(int argc, char * argv[]){
     }
 
 
-    // defaults
+    // get values from options
     ifstream file_input;
     bool replace_comment = (parsed_options.find(5)!=parsed_options.end());
     string comment_string = "#";
@@ -139,6 +139,12 @@ int main(int argc, char * argv[]){
     while(getline(input, line)){
 	// detect if line is a comment line
 	bool is_comment = string_is_comment(line, comment_string, ignore_leading_whitespace);
+
+	// do this if the option "replace comments by
+	// empty line" is active. It's important to do
+	// this here, so that the line will later be
+	// recognized as a whitespace line and will be
+	// handled by the whitespace options accordingly.
 	if(is_comment && replace_comment){
 	    is_comment = false;
 	    line = "";
