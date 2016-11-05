@@ -4,6 +4,13 @@ A utility for printing files to stdout, ignoring comment lines
 
 ## Usage
 
+Call `conficat` either with the input file as an argument, or reading from stdin.
+```bash
+cat apache2.conf | conficat -sri
+conficat -rsi apache2.conf
+```
+The output for these two commands is equivalent.
+
 ```
 Usage: conficat [INPUT FILE] [OPTIONS]
 
